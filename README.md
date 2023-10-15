@@ -8,14 +8,6 @@ FoodForge is a Java-based project developed using the Spring Boot framework. Foo
 
 FoodForge offers a variety of features designed to enhance the culinary experience. Some of the key features include:
 
-## Introduction
-
-FoodForge is a Java-based project developed using the Spring Boot framework. In the world of culinary innovation, FoodForge serves as a platform that connects food enthusiasts, chefs, and home cooks. This project aims to provide a space for food lovers to discover, create, and share culinary delights.
-
-## Features
-
-FoodForge offers a variety of features designed to enhance the culinary experience. Some of the key features include:
-
 ### User Features
 
 #### Recipe Discovery:
