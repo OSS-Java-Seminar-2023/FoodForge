@@ -22,6 +22,11 @@ FoodForge offers a variety of features designed to enhance the culinary experien
 
 - Access cooking tips and techniques shared by experienced chefs and fellow home cooks.
 
+#### Meal Planning:
+
+- Create daily or weekly meal schedules.
+- Generate a shopping list based on your meal plan to make grocery shopping.
+
 #### Recipe Rating and Reviews:
 
 - Rate and provide feedback on recipes.
