@@ -53,3 +53,8 @@ FoodForge utilizes the following technologies:
 - Java
 - Spring Boot
 - TBD
+
+## Contributors
+
+- Ivan Lucić
+- Karlo Hrabar
