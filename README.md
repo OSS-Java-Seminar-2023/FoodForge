@@ -38,10 +38,6 @@ FoodForge offers a variety of features designed to enhance the culinary experien
 
 - Create and organize personal cookbooks with your favorite recipes.
 
-#### Community Engagement:
-
-- Connect with other home cooks, share experiences, and explore new dishes.
-
 ## Implementation
 
 - TBD
