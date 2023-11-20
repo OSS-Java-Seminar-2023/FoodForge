@@ -39,7 +39,11 @@ FoodForge utilizes the following technologies:
 
 - Java
 - Spring Boot
-- TBD
+- MariaDB
+- Thymeleaf
+- Flyway
+- Bootstrap
+- Docker
 
 ## Contributors
 
