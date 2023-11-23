@@ -29,7 +29,8 @@ FoodForge offers a variety of features designed to enhance the culinary experien
 
 ## Implementation
 
-![schema](https://github.com/OSS-Java-Seminar-2023/FoodForge/assets/92521766/c29e0743-2a68-4213-8da3-6d5d3d395d89)
+![schema](https://github.com/OSS-Java-Seminar-2023/FoodForge/assets/92521766/324d4ca2-2390-45c9-ba02-918718dabf61)
+
 
 
 
