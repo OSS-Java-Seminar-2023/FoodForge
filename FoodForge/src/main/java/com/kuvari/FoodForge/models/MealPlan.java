@@ -1,4 +1,4 @@
-package com.kuvari.FoodForge.model;
+package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,6 +8,7 @@ import java.util.UUID;
 @Data
 public class MealPlan {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
 
@@ -24,4 +25,7 @@ public class MealPlan {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "shoppinglist_id")
+    private ShoppingList shoppingList;
 }

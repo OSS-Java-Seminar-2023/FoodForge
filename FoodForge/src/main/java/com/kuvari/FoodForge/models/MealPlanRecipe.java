@@ -1,4 +1,4 @@
-package com.kuvari.FoodForge.model;
+package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -9,6 +9,7 @@ import java.util.UUID;
 @Data
 public class MealPlanRecipe {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name ="id")
     private UUID id;
 

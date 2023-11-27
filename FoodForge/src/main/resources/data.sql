@@ -1,0 +1,1 @@
+INSERT INTO Ingredient (ingredient_name, unit) VALUES

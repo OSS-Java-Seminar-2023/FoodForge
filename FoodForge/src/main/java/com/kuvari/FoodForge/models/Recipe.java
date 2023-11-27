@@ -1,7 +1,9 @@
-package com.kuvari.FoodForge.model;
+package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Table
@@ -15,6 +17,7 @@ public class Recipe {
     @Column(name = "title")
     private String title;
 
+    @Lob
     @Column(name = "details", columnDefinition = "text")
     private String details;
 
@@ -24,4 +27,10 @@ public class Recipe {
     @Column(name = "prep_time")
     private Short prepTime;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "recipe")
+    List<Review> reviews;
 }

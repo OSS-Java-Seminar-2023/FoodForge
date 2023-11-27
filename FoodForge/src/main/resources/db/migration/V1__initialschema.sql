@@ -1,3 +1,12 @@
+CREATE TABLE User(
+	id varchar(255) NOT NULL,
+	role varchar(20),
+	username varchar(30),
+	email varchar(30),
+	passwd varchar(60),
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE Ingredient(
 	id varchar(255) NOT NULL,
 	ingredient_name varchar(40),
@@ -6,14 +15,6 @@ CREATE TABLE Ingredient(
 );
 
 
-CREATE TABLE Recipe(
-	id varchar(255) NOT NULL,
-	title varchar(30),
-	details text,
-	difficulty varchar(30),
-	prep_time smallint,
-	PRIMARY KEY (id)
-);
 
 CREATE TABLE ShoppingList(
   id varchar(255) NOT NULL,
@@ -21,15 +22,18 @@ CREATE TABLE ShoppingList(
 );
 
 
-CREATE TABLE User(
+
+
+
+CREATE TABLE Recipe(
 	id varchar(255) NOT NULL,
-	role varchar(20),
-	username varchar(30),
-	email varchar(30),
-	passwd varchar(60),
-	recipe_id varchar(255),
+	title varchar(30),
+	details text,
+	difficulty varchar(30),
+	prep_time smallint,
+	user_id varchar(255),
 	PRIMARY KEY (id),
-	FOREIGN KEY (recipe_id) REFERENCES Recipe(id)
+	FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
 CREATE TABLE MealPlan(

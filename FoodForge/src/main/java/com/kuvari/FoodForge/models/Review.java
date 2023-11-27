@@ -1,4 +1,4 @@
-package com.kuvari.FoodForge.model;
+package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Review {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
 

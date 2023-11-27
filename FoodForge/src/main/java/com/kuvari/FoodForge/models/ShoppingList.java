@@ -1,4 +1,4 @@
-package com.kuvari.FoodForge.model;
+package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
