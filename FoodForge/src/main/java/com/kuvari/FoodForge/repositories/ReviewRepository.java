@@ -1,9 +1,10 @@
 package com.kuvari.FoodForge.repositories;
 
-import com.kuvari.FoodForge.models.Review;
+import com.kuvari.FoodForge.models.ReviewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
-
-public interface ReviewRepository extends JpaRepository<Review, UUID> {
+@Repository
+public interface ReviewRepository extends JpaRepository<ReviewEntity, UUID> {
 }

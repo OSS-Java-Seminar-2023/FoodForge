@@ -2,30 +2,33 @@ package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.util.UUID;
 @Entity
 @Table
 @Data
-public class MealPlan {
+public class MealPlanEntity {
+
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "plan_name")
+    @Column
     private String planName;
 
-    @Column(name = "details", columnDefinition = "text")
+    @Column
     private String details;
 
-    @Column(name = "plan_date")
+    @Column
     private java.sql.Date planDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
     @OneToOne
-    @JoinColumn(name = "shoppinglist_id")
-    private ShoppingList shoppingList;
+    @JoinColumn
+    private ShoppingListEntity shoppingListEntity;
+
 }

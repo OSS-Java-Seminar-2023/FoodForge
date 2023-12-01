@@ -8,29 +8,29 @@ import java.util.UUID;
 @Entity
 @Table
 @Data
-public class Recipe {
+public class RecipeEntity {
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "title")
+    @Column
     private String title;
 
-    @Lob
-    @Column(name = "details", columnDefinition = "text")
+    @Column
     private String details;
 
-    @Column(name = "difficulty")
+    @Column
     private String difficulty;
 
-    @Column(name = "prep_time")
+    @Column
     private Short prepTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
-    @OneToMany(mappedBy = "recipe")
-    List<Review> reviews;
+    @OneToMany(mappedBy = "recipeEntity")
+    List<ReviewEntity> reviews;
+
 }

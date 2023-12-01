@@ -1,10 +1,14 @@
 package com.kuvari.FoodForge.repositories;
-
-import com.kuvari.FoodForge.models.User;
+import com.kuvari.FoodForge.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, UUID>{
 
+    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findByUsername(String Username);
 }

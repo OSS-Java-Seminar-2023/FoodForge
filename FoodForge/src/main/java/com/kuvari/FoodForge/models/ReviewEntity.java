@@ -2,24 +2,31 @@ package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.util.UUID;
+
 @Entity
 @Table
 @Data
-public class RecipeIngredient {
+public class ReviewEntity {
+
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private UUID id;
+
+    @Column
+    private Byte score;
+
+    @Column
+    private java.sql.Date reviewDate;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
-    private Recipe recipe;
+    private RecipeEntity recipeEntity;
 
     @ManyToOne
-    @JoinColumn(name = "ingredient_id")
-    private Ingredient ingredient;
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
 
-    @Column(name = "quantity")
-    private Integer quantity;
 }

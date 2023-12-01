@@ -1,9 +1,12 @@
 package com.kuvari.FoodForge.repositories;
-
-import com.kuvari.FoodForge.models.Ingredient;
+import com.kuvari.FoodForge.models.IngredientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface IngredientRepository extends JpaRepository<Ingredient, UUID> {
+@Repository
+public interface IngredientRepository extends JpaRepository<IngredientEntity, UUID> {
+
+
 }
