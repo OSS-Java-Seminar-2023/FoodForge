@@ -17,10 +17,7 @@ public class UserService {
     @Autowired
     public UserRepository userRepository;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 
     public void registerUser(UserDto userDto) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -63,5 +60,7 @@ public class UserService {
 
         return passwordEncoder.matches(password, userEntity.getPasswd());
     }
+
+
 
 }

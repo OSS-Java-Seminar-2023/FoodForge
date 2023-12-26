@@ -2,6 +2,8 @@ package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 @Entity
@@ -24,6 +26,4 @@ public class RecipeIngredientEntity {
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
     private IngredientEntity ingredientEntity;
-
-
 }

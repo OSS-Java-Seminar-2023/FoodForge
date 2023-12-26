@@ -18,17 +18,17 @@ class UserServiceTest {
     UserService userService;
     @Test
     void testSuccessfulRegistration() {
-        var userDto = new UserDto("testUser","test@example.com","PasswordJakKoStena123");
+        var userDto = new UserDto("testUser1","test1@example.com","PasswordJakKoStena123");
 
         userService.registerUser(userDto);
 
-        userService.userRepository.findByUsername("testUser").ifPresent(user -> assertNotNull(user.getUsername()));
+        userService.userRepository.findByUsername("testUser1").ifPresent(user -> assertNotNull(user.getUsername()));
 
     }
 
     @Test
     void registerExistingUserToTriggerAnException() {
-        var userDto = new UserDto("testUser","test@example.com","PasswordJakKoStena123");
+        var userDto = new UserDto("testUser1","test1@example.com","PasswordJakKoStena123");
 
         assertThrows(RuntimeException.class,() -> userService.registerUser(userDto));
 
@@ -36,6 +36,6 @@ class UserServiceTest {
 
     @Test
     void testSuccessfulLogin(){
-        assertTrue(userService.loginUser("testUser","PasswordJakKoStena123"));
+        assertTrue(userService.loginUser("testUser1","PasswordJakKoStena123"));
     }
 }
