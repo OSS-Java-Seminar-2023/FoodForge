@@ -37,7 +37,6 @@ public class RecipeService {
         recipe.setDifficulty(recipeDTO.getDifficulty());
         recipe.setPrepTime(recipeDTO.getPrepTime());
 
-        List<RecipeIngredientEntity> recipeIngredients = new ArrayList<>();
         for (RecipeIngredientDto ingredientDto : recipeDTO.getIngredients()) {
             var existingIngredient = ingredientRepository.findById(ingredientDto.getIngredientId())
                     .orElseThrow(() -> new NoSuchElementException("Ingredient not found"));
@@ -46,9 +45,10 @@ public class RecipeService {
             recipeIngredient.setQuantity(ingredientDto.getQuantity());
             recipeIngredient.setRecipeEntity(recipe);
             recipeIngredient.setIngredientEntity(existingIngredient);
-            recipeIngredients.add(recipeIngredient);
+
+            recipeIngredientRepository.save(recipeIngredient);
         }
-        recipe.setRecipeIngredients(recipeIngredients);
+
         return recipeRepository.save(recipe);
     }
 

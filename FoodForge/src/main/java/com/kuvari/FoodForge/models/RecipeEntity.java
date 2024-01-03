@@ -26,9 +26,6 @@ public class RecipeEntity {
     @Column
     private Short prepTime;
 
-    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecipeIngredientEntity> recipeIngredients;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;

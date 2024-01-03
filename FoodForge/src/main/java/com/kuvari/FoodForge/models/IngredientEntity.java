@@ -1,5 +1,6 @@
 package com.kuvari.FoodForge.models;
 
+import com.kuvari.FoodForge.models.enums.Unit;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 @Entity
-@Table
+@Table(name = "Ingredient")
 @Data
 public class IngredientEntity {
 
@@ -16,10 +17,10 @@ public class IngredientEntity {
     @Column
     private  UUID id;
 
-    @Column
+    @Column(name = "ingredient_name")
     private String ingredientName;
 
     @Column
-    private String unit;
-
+    @Enumerated(EnumType.STRING)
+    private Unit unit;
 }

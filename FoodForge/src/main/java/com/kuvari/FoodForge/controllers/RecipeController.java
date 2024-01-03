@@ -38,7 +38,7 @@ public class RecipeController {
     }
 
     @DeleteMapping("/recipe/{id}")
-    public String deleteRecipe(@PathVariable UUID id) {
+    public ResponseEntity<?> deleteRecipe(@PathVariable UUID id) {
         boolean deletionSuccessful = recipeService.deleteRecipe(id);
         return deletionSuccessful ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
