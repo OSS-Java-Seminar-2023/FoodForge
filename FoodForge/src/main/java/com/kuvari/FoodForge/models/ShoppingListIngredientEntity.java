@@ -3,17 +3,18 @@ package com.kuvari.FoodForge.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "ShoppingListIngredient")
 @Data
-@AllArgsConstructor
 public class ShoppingListIngredientEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @UuidGenerator
     private UUID id;
 
     @Column

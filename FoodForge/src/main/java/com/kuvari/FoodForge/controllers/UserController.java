@@ -20,7 +20,6 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-
     @GetMapping("/register")
     public String RegistrationForm() {
         return "registration";

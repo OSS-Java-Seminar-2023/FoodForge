@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingredients</title>
+    <link rel="stylesheet" th:href="@{/css/ingredient.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/ingredientModals.css}" type="text/css">
+</head>
+<body>
+
+<div class="container">
+
+    <section id="titleSection">
+        <h2 id="manageIngredientsTitle">Ingredients</h2>
+    </section>
+
+    <!-- Display List of Ingredients -->
+    <section id="ingredientListSection">
+        <table class="ingredient-table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Unit</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ingredient : ${ingredientList}">
+                <td th:text="${ingredient.ingredientName}"></td>
+                <td th:text="${ingredient.unit}"></td>
+                <td>
+                    <div class="button-container">
+                        <button th:onclick="openUpdateModal([[${ingredient.id}]], [[${ingredient.ingredientName}]], [[${ingredient.unit}]])">Edit</button>
+                        <button th:onclick="openDeleteModal([[${ingredient.id}]])">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Create modal -->
+    <div id="createModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeCreateModal()">&times;</span>
+            <h3>Create Ingredient</h3>
+            <form action="/admin/ingredients/add" method="post" th:object="${ingredientDto}">
+                <div class="label-input-container">
+                    <label for="ingredientName">Ingredient Name:</label>
+                    <input type="text" id="ingredientName" name="ingredientName" th:field="*{ingredientName}" class="custom-input" required/>
+                </div>
+                <div class="label-input-container">
+                    <label for="unit">Unit:</label>
+                    <select id="unit" name="unit" th:field="*{unit}" class="custom-select" required>
+                        <option th:each="unit : ${T(com.kuvari.FoodForge.models.enums.Unit).values()}" th:value="${unit}" th:text="${unit}"></option>
+                    </select>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Create Ingredient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Update modal -->
+    <div id="updateModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeUpdateModal()">&times;</span>
+            <h3>Edit Ingredient</h3>
+            <form action="/admin/ingredients/edit/{id}" method="post" id="updateForm" th:object="${ingredientDto}">
+                <div class="form-group label-input-container">
+                    <label for="updatedIngredientName">Updated Ingredient Name:</label>
+                    <input type="text" id="updatedIngredientName" name="ingredientName" th:field="*{ingredientName}" class="custom-input" th:value="${ingredientDto.ingredientName}" required/>
+                </div>
+                <div class="form-group label-input-container">
+                    <label for="updatedUnit">Updated Unit:</label>
+                    <select id="updatedUnit" name="unit" class="custom-select" required>
+                        <option th:each="unit : ${T(com.kuvari.FoodForge.models.enums.Unit).values()}" th:value="${unit}" th:text="${unit}"></option>
+                    </select>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Update Ingredient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div id="deleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteModal()">&times;</span>
+            <h3>Delete Ingredient</h3>
+            <p>Are you sure you want to delete this ingredient?</p>
+            <form action="/admin/ingredients/delete/{id}" method="post" id="deleteForm" th:object="${ingredientDto}">
+                <input type="hidden" name="_method" value="DELETE" />
+                <input type="hidden" id="deleteIngredientId" name="id" th:value="${ingredientDto.id}" />
+                <div class="button-container">
+                    <button type="submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Button Section -->
+    <section id="createButtonSection">
+        <div class="button-container">
+        <button onclick="openCreateModal()">Create Ingredient</button>
+        </div>
+    </section>
+</div>
+
+<script src="/js/ingredient.js"></script>
+</body>
+</html>

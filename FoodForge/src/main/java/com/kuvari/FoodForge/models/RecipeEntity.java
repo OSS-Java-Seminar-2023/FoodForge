@@ -2,6 +2,7 @@ package com.kuvari.FoodForge.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +13,7 @@ public class RecipeEntity {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @UuidGenerator
     private UUID id;
 
     @Column
