@@ -50,4 +50,3 @@ FoodForge utilizes the following technologies:
 
 - Ivan Lucić
 - Karlo Hrabar
-- Ivan Čuljak
