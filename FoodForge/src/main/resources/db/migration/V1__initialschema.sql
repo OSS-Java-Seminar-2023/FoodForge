@@ -21,10 +21,6 @@ CREATE TABLE ShoppingList(
   shoppinglist_name varchar(30)
 );
 
-
-
-
-
 CREATE TABLE Recipe(
 	id varchar(255) NOT NULL,
 	title varchar(30),
@@ -96,6 +92,7 @@ CREATE TABLE ShoppingListIngredient(
 	FOREIGN KEY (shoppinglist_id) REFERENCES ShoppingList(id),
 	FOREIGN KEY (ingredient_id) REFERENCES Ingredient(id)
 );
+
 
 
 

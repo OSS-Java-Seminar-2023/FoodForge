@@ -1,12 +1,13 @@
 package com.kuvari.FoodForge.models;
 
+import com.kuvari.FoodForge.models.enums.Difficulty;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 import java.util.UUID;
 @Entity
-@Table
+@Table(name = "Recipe")
 @Data
 public class RecipeEntity {
     @Id
@@ -21,7 +22,8 @@ public class RecipeEntity {
     private String details;
 
     @Column
-    private String difficulty;
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
     @Column
     private Short prepTime;

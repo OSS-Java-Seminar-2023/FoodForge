@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table
+@Table(name = "Review")
 @Data
 public class ReviewEntity {
 

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 @Entity
-@Table
+@Table(name = "RecipeIngredient")
 @Data
 public class RecipeIngredientEntity {
 

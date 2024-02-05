@@ -4,6 +4,7 @@ import com.kuvari.FoodForge.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Entity
@@ -19,13 +20,13 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column
+    @Column(nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String passwd;
 
     @OneToMany(mappedBy = "userEntity")
@@ -36,5 +37,6 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity")
     private List<MealPlanEntity> mealPlanEntities;
+
 
 }

@@ -2,9 +2,7 @@ package com.kuvari.FoodForge.controllers;
 
 import com.kuvari.FoodForge.models.RecipeEntity;
 import com.kuvari.FoodForge.dto.RecipeDto;
-import com.kuvari.FoodForge.models.UserEntity;
 import com.kuvari.FoodForge.services.RecipeService;
-import com.kuvari.FoodForge.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
