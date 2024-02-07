@@ -1,56 +1,76 @@
 package com.kuvari.FoodForge.services;
 
-import com.kuvari.FoodForge.dto.IngredientDto;
 import com.kuvari.FoodForge.dto.RecipeDto;
 import com.kuvari.FoodForge.dto.RecipeIngredientDto;
+import com.kuvari.FoodForge.exceptions.IngredientNotFoundException;
+import com.kuvari.FoodForge.mappers.RecipeMapper;
 import com.kuvari.FoodForge.models.IngredientEntity;
 import com.kuvari.FoodForge.models.RecipeEntity;
 import com.kuvari.FoodForge.models.RecipeIngredientEntity;
-import com.kuvari.FoodForge.models.UserEntity;
 import com.kuvari.FoodForge.repositories.IngredientRepository;
 import com.kuvari.FoodForge.repositories.RecipeIngredientRepository;
 import com.kuvari.FoodForge.repositories.RecipeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RecipeService {
-    @Autowired
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
 
-    @Autowired
-    private IngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
 
-    @Autowired
-    private RecipeIngredientRepository recipeIngredientRepository;
+    private  final RecipeIngredientRepository recipeIngredientRepository;
+
+    private final RecipeMapper recipeMapper;
+
+
 
     public Optional<RecipeEntity> getRecipeById(UUID recipeId) {
         return recipeRepository.findById(recipeId);
     }
 
-    public RecipeEntity createRecipeWithIngredients(RecipeDto recipeDTO) {
-        RecipeEntity recipe = new RecipeEntity();
-        recipe.setTitle(recipeDTO.getTitle());
-        recipe.setDetails(recipeDTO.getDetails());
-        recipe.setDifficulty(recipeDTO.getDifficulty());
-        recipe.setPrepTime(recipeDTO.getPrepTime());
+    public List<RecipeDto> getAllRecipes() {
+        List<RecipeEntity> recipes = recipeRepository.findAll();
 
-        for (RecipeIngredientDto ingredientDto : recipeDTO.getIngredients()) {
-            var existingIngredient = ingredientRepository.findById(ingredientDto.getIngredientId())
-                    .orElseThrow(() -> new NoSuchElementException("Ingredient not found"));
-
-            RecipeIngredientEntity recipeIngredient = new RecipeIngredientEntity();
-            recipeIngredient.setQuantity(ingredientDto.getQuantity());
-            recipeIngredient.setRecipeEntity(recipe);
-            recipeIngredient.setIngredientEntity(existingIngredient);
-
-            recipeIngredientRepository.save(recipeIngredient);
+        if (recipes.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return recipes.stream()
+                    .map(recipeMapper::toDto)
+                    .collect(Collectors.toList());
         }
-
-        return recipeRepository.save(recipe);
     }
+
+    public void createRecipe(RecipeDto recipeDTO) {
+        var recipe = recipeMapper.toEntity(recipeDTO);
+
+        List<RecipeIngredientEntity> ingredients = new ArrayList<>();
+        for (var ingredientDto : recipeDTO.getIngredients()) {
+            var ingredientId = ingredientDto.getIngredientId();
+            var existingIngredient = ingredientRepository.findById(ingredientId)
+                    .orElseThrow(() -> new IngredientNotFoundException(ingredientId));
+
+            var recipeIngredient = new RecipeIngredientEntity();
+            recipeIngredient.setQuantity(ingredientDto.getQuantity());
+            recipeIngredient.setIngredientEntity(existingIngredient);
+            recipeIngredient.setRecipeEntity(recipe);
+
+            ingredients.add(recipeIngredient);
+        }
+        var recipeEntity = recipeRepository.save(recipe);
+
+        ingredients.forEach(ingredient -> ingredient.setRecipeEntity(recipeEntity));
+        recipeIngredientRepository.saveAll(ingredients);
+
+        recipeEntity.setRecipeIngredients(ingredients);
+
+        recipeMapper.toDto(recipeEntity);
+    }
+
 
     public boolean deleteRecipe(UUID recipeId) {
         if (recipeRepository.existsById(recipeId)) {

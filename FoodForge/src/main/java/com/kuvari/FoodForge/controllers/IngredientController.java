@@ -16,12 +16,12 @@ import java.util.UUID;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/admin/ingredients")
+@RequestMapping("/ingredients")
 public class IngredientController {
 
     private final IngredientService ingredientService;
 
-    @GetMapping("/list")
+    @GetMapping
     public String showCreateIngredientForm(Model model) {
         List<IngredientDto> ingredientList = ingredientService.getAllIngredients();
         model.addAttribute("ingredientDto", new IngredientDto());
@@ -34,11 +34,10 @@ public class IngredientController {
     public String createIngredient(@ModelAttribute IngredientDto ingredientDto, Model model) {
         try {
             ingredientService.createIngredient(ingredientDto);
-            model.addAttribute("successMessage", "Ingredient created successfully!");
         } catch (DuplicateIngredientException ex) {
             model.addAttribute("errorMessage", ex.getMessage());
         }
-        return "redirect:/admin/ingredients/list";
+        return "redirect:/ingredient";
     }
 
 
@@ -47,14 +46,12 @@ public class IngredientController {
     public String updateIngredient(@PathVariable UUID id, @ModelAttribute IngredientDto updatedIngredientDto, Model model) {
         try {
             ingredientService.editIngredient(id, updatedIngredientDto);
-            model.addAttribute("successMessage", "Ingredient updated successfully!");
-
         } catch (IngredientNotFoundException ex) {
             model.addAttribute("errorMessage", ex.getMessage());
         } catch (DuplicateIngredientException ex) {
             model.addAttribute("errorMessage", ex.getMessage());
         }
-        return "redirect:/admin/ingredients/list";
+        return "redirect:/ingredients";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -62,11 +59,10 @@ public class IngredientController {
     public String deleteIngredient(@PathVariable UUID id, Model model) {
         try {
             ingredientService.deleteIngredient(id);
-            model.addAttribute("successMessage", "Ingredient deleted successfully!");
         } catch (IngredientNotFoundException ex) {
             model.addAttribute("errorMessage", ex.getMessage());
         }
-        return "redirect:/admin/ingredients/list";
+        return "redirect:/ingredients";
     }
 
 

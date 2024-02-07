@@ -7,7 +7,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.List;
 import java.util.UUID;
 @Entity
-@Table
+@Table(name = "Recipe")
 @Data
 public class RecipeEntity {
     @Id
@@ -25,14 +25,16 @@ public class RecipeEntity {
     @Column
     private String difficulty;
 
-    @Column
+    @Column(name="prep_time")
     private Short prepTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
+    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.ALL)
+    private List<RecipeIngredientEntity> recipeIngredients;
+
     @OneToMany(mappedBy = "recipeEntity")
     List<ReviewEntity> reviews;
-
 }

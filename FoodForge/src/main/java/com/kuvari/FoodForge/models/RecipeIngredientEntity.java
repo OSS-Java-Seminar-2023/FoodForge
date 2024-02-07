@@ -8,7 +8,7 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 @Entity
-@Table
+@Table(name="RecipeIngredient")
 @Data
 public class RecipeIngredientEntity {
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe List</title>
+</head>
+<body>
+<h1>Recipes</h1>
+
+<!-- Check if the recipe list is empty -->
+<div th:if="${recipeList.isEmpty()}">
+    <p>No recipes available.</p>
+</div>
+
+<div th:if="${!recipeList.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Details</th>
+            <th>Difficulty</th>
+            <th>Prep Time</th>
+            <th>Ingredients</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipe : ${recipeList}">
+            <td th:text="${recipe.title}">Title</td>
+            <td th:text="${recipe.details}">Details</td>
+            <td th:text="${recipe.difficulty}">Difficulty</td>
+            <td th:text="${recipe.prepTime}">Prep Time</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/recipes/add">Add New Recipe</a>
+
+</body>
+</html>

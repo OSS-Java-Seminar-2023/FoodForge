@@ -4,7 +4,6 @@ import com.kuvari.FoodForge.dto.IngredientDto;
 import com.kuvari.FoodForge.models.IngredientEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
